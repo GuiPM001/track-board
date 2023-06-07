@@ -1,0 +1,17 @@
+.modal_container {
+  width: 75%;
+  height: 90%;
+  margin-top: -20px;
+  position: absolute;
+  background-color: #121212;
+  border: none;
+}
+
+.modal_container::-webkit-scrollbar{
+  display: none;
+}
+
+.close_button {
+  color: #D2D2D2 !important;
+  position: inherit !important;
+}

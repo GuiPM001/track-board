@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainLayout from '../partials/MainLayout';
 import Tracks from '../pages/Tracks';
 import Wrapper from '../components/Wrapper';
+import Playlists from '../pages/Playlists';
 
 function Router() {
   return (
@@ -12,6 +13,7 @@ function Router() {
         <Route element={<MainLayout />}>
             <Route path='/' element={<Wrapper title='Your profile'><Profile /></Wrapper>} />
             <Route path='/tracks' element={<Wrapper title='Top tracks in the last 30 days'><Tracks /></Wrapper>} />
+            <Route path='/playlists' element={<Wrapper title='Your playlists'><Playlists /></Wrapper>} />
         </Route>
       </Routes>
     </BrowserRouter>
