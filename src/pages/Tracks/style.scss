@@ -15,14 +15,7 @@
     grid-row-gap: 15px;
     grid-column-gap: 30px;
     grid-template-columns: auto auto;
-    grid-auto-flow: column;
-  }
-
-  .list::before {
-    content: '';
-    grid-column: 1;
-    grid-row-start: 1;
-    grid-row-end: 4;
+    grid-auto-flow: row;
   }
 
   .recomendation_list {
@@ -50,6 +43,10 @@
     display: flex;
     flex-direction: row;
     align-items: start;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
     .track_image {
       border-radius: 10px;
@@ -65,18 +62,21 @@
     font-weight: 700;
   }
 
-  div {
+  .track_details {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     .track_name {
       color: #1ED760;
       font-size: 26px;
       font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .track_album {
-
+      white-space: normal;
     }
   }
 
@@ -96,8 +96,4 @@
       text-transform: capitalize;
     }
   }
-}
-
-.tracks_container::-webkit-scrollbar{
-  display: none;
 }

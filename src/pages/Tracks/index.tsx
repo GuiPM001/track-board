@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { getRecomendations, getTopTracks } from '../../services/Spotify';
+import { createPlaylist, getRecomendations, getTopTracks } from '../../services/Spotify';
 import Loading from '../../components/Loading';
 import './style.scss';
 import { Track } from '../../interfaces/Track';
 import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
 
 function Tracks() {
   const [loading, setLoading] = useState<boolean>();
   const [topTracks, setTopTracks] = useState<Track[]>([]);
   const [recomendations, setRecomendations] = useState<Track[]>([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -35,7 +38,24 @@ function Tracks() {
         setRecomendations(response);
       })
       .catch((e) => {
-        alert(e)
+        alert(e);
+      })
+      .finally(() => {
+        setLoading(false);
+      })
+  }
+
+  function addNewPlaylist() {
+    setLoading(true);
+
+    let tracksIds = recomendations.map(r => r.id);
+
+    createPlaylist(tracksIds)
+      .then((response) => {
+        navigate(`/playlist/${response.id}`)
+      })
+      .catch((e) => {
+        alert(e);
       })
       .finally(() => {
         setLoading(false);
@@ -56,7 +76,7 @@ function Tracks() {
               >
                 <span className='track_index'>{index + 1}</span>
                 <img src={track.album.images[1].url} className='track_image'/> 
-                <div>
+                <div className='track_details'>
                   <span className='track_name'>{track.name}</span>
                   <span className='track_album'>{track.artists.map(artist => artist.name).join(', ')}</span>
                 </div>
@@ -94,10 +114,10 @@ function Tracks() {
               </ul>
 
               <Button 
-                  variant='contained'
-                  className='btnRecomendations'
-                  onClick={fetchRecomendations}
-                >
+                variant='contained'
+                className='btnRecomendations'
+                onClick={addNewPlaylist}
+              >
                 + Add to a new playlist
               </Button>
             </>

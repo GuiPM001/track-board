@@ -10,8 +10,8 @@ function Wrapper(props: WrapperProps) {
   const { title, children } = props;
 
   return (
-    <div className="wrapper">
-      <h1 className="title">{title}</h1>
+    <div className='wrapper'>
+      <h1 className='title'>{title}</h1>
       {children}
     </div>
   )

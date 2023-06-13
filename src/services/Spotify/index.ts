@@ -4,12 +4,13 @@ import { getAccessToken } from "../Auth";
 import { Track } from "../../interfaces/Track";
 import { Playlist } from "../../interfaces/Playlist";
 
-async function fetchApi(endpoint: string, method: string) {
+async function fetchApi(endpoint: string, method: string, body?: any) {
   var accessToken = getAccessToken();
 
   let response = await axios(`https://api.spotify.com/v1/${endpoint}`, {
     method: method,
-    headers: { Authorization: `Bearer ${accessToken}`}
+    headers: { Authorization: `Bearer ${accessToken}`},
+    data: JSON.stringify(body)
   });
 
   return response;
@@ -48,11 +49,28 @@ export async function getPlaylists(): Promise<Playlist[]> {
   return response.data.items;
 } 
 
-export async function getPlaylistTracks(playlistId: string): Promise<Track[]> {
+export async function getPlaylist(playlistId: string): Promise<Playlist> {
   let response = await fetchApi(
-    `playlists/${playlistId}/tracks`,
+    `playlists/${playlistId}`,
     'GET'
   );
 
-  return response.data.items.map((r: any) => r.track);
+  return response.data;
+}
+
+export async function createPlaylist(tracksIds: string[]): Promise<Playlist> {
+  const tracksUri = tracksIds.map(id => `spotify:track:${id}`);
+  const user = await getProfile();
+  console.log(tracksUri);
+  const playlist = await fetchApi(`users/${user.id}/playlists`, 'POST', {
+    "name": "My recommendation playlist",
+    "description": "Playlist created by the tutorial on developer.spotify.com",
+    "public": false
+  });
+  console.log(playlist);
+  await fetchApi(
+    `playlists/${playlist.data.id}/tracks?uris=${tracksUri.join(',')}`,
+    'POST'
+  )
+  return playlist.data;
 }

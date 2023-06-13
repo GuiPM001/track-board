@@ -25,16 +25,16 @@ function Profile() {
   return (
     <div className='profile_container'>
       {loading && <Loading />}
-      <div className="user_info">
-        <div className="user_name">
+      <div className='user_info'>
+        <div className='user_name'>
           <img src={user?.images[0].url}/>
           <h1>{user?.display_name}</h1>
         </div>
-        <div className="grid">
+        <div className='grid'>
           <span>User ID: {user?.id}</span>
           <span>Subscription: {user?.product}</span>
         </div>
-        <div className="grid">
+        <div className='grid'>
           <span>Followers: {user?.followers.total}</span>
           <span>Email: {user?.email}</span>
         </div>
