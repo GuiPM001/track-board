@@ -34,9 +34,11 @@ function PlaylistDetails() {
       })
   }, []);
 
+  if (loading)
+    return <Loading />
+
   return (
     <div className='container_details'>
-      {loading && <Loading />}
       <div className='overview'>
         <IconButton className='back_button' aria-label='Back' onClick={() => navigate('/playlists')}>
           <ArrowBackIosRoundedIcon />
@@ -63,7 +65,11 @@ function PlaylistDetails() {
       <div className='tracks'>
         <ul>
           {playlist?.tracks.items.map(item =>
-            <li key={item.track.id} className='list_item' onClick={() => setPlaying(item.track.id)}>
+            <li 
+              key={item.track.id} 
+              className='list_item' 
+              onClick={() => setPlaying(item.track.id)}
+            >
               <img src={item.track.album.images[1].url} alt='' />
               <div className='track_details'>
                 <span className='name'>{item.track.name}</span>
@@ -72,6 +78,7 @@ function PlaylistDetails() {
             </li>
           )}
         </ul>
+        
         <div className='playbar_container'>
           <Playbar trackId={playing} />
         </div>

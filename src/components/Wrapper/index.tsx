@@ -12,6 +12,9 @@ function Wrapper(props: WrapperProps) {
   return (
     <div className='wrapper'>
       <h1 className='title'>{title}</h1>
+      
+      {/* TODO: adicionar componente de loading aqui, pra não precisar
+      colocar o loading em todas as paginas */}
       {children}
     </div>
   )

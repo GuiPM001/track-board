@@ -29,27 +29,27 @@ function Playlists() {
     navigate(`/playlist/${playlist.id}`)
   }
 
+  if (loading)
+    return <Loading />
+
   return (
-    <>
-      <div className='playlist_container'>
-        {loading && <Loading />}
-        <ul className='list'>
-          {playlists?.map((playlist) => 
-            <li 
-              onClick={() => goToPlaylist(playlist)}
-              className='list_item'
-              key={playlist.id}
-            >
-              <img src={playlist?.images[0]?.url} className='playlist_image'/> 
-              <div>
-                <span className='playlist_name'>{playlist.name}</span>
-                <span className='playlist_tracks'>Total songs: {playlist.tracks.total}</span>
-              </div>
-            </li>
-          )}
-        </ul>
-      </div>
-    </>
+    <div className='playlist_container'>
+      <ul className='list'>
+        {playlists?.map((playlist) => 
+          <li 
+            onClick={() => goToPlaylist(playlist)}
+            className='list_item'
+            key={playlist.id}
+          >
+            <img src={playlist?.images[0]?.url} className='playlist_image'/> 
+            <div>
+              <span className='playlist_name'>{playlist.name}</span>
+              <span className='playlist_tracks'>Total songs: {playlist.tracks.total}</span>
+            </div>
+          </li>
+        )}
+      </ul>
+    </div>
   )
 }
 

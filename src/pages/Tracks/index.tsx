@@ -62,10 +62,11 @@ function Tracks() {
       })
   }
 
+  if (loading)
+    return <Loading />
+
   return (
     <div className='tracks_container'>
-      {loading && <Loading />}
-
       {topTracks.length != 0 && 
         <>
           <ul className='list'>
