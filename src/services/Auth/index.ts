@@ -52,6 +52,7 @@ async function redirectToAuthCodeFlow() {
     user-read-private 
     user-read-email 
     user-top-read 
+    user-follow-read
     playlist-read-private 
     playlist-read-collaborative 
     playlist-modify-public 

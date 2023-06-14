@@ -3,6 +3,7 @@ import { UserProfile } from "../../interfaces/UserProfile";
 import { getAccessToken } from "../Auth";
 import { Track } from "../../interfaces/Track";
 import { Playlist } from "../../interfaces/Playlist";
+import { Artist } from "../../interfaces/Artist";
 
 async function fetchApi(endpoint: string, method: string, body?: any) {
   var accessToken = getAccessToken();
@@ -29,6 +30,15 @@ export async function getTopTracks(): Promise<Track[]> {
   );
 
   return response.data.items;
+}
+
+export async function getFollowArtists(): Promise<Artist[]> {
+  let response = await fetchApi(
+    'me/following?type=artist&limit=14',
+    'GET'
+  );
+
+  return response.data.artists.items;
 }
 
 export async function getRecomendations(tracksIds: string[]): Promise<Track[]> {
@@ -61,13 +71,13 @@ export async function getPlaylist(playlistId: string): Promise<Playlist> {
 export async function createPlaylist(tracksIds: string[]): Promise<Playlist> {
   const tracksUri = tracksIds.map(id => `spotify:track:${id}`);
   const user = await getProfile();
-  console.log(tracksUri);
+
   const playlist = await fetchApi(`users/${user.id}/playlists`, 'POST', {
     "name": "My recommendation playlist",
     "description": "Playlist created by the tutorial on developer.spotify.com",
     "public": false
   });
-  console.log(playlist);
+
   await fetchApi(
     `playlists/${playlist.data.id}/tracks?uris=${tracksUri.join(',')}`,
     'POST'
