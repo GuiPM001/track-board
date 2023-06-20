@@ -1,0 +1,11 @@
+.recomendation_list {
+  list-style-type: none;
+  width: 90%;
+  margin: 0;
+  padding: 15px 0 0 30px;
+  display: grid;
+  grid-row-gap: 15px;
+  grid-column-gap: 30px;
+  grid-template-columns: auto auto;
+  grid-auto-flow: row;
+}
