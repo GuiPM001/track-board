@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { createPlaylist, getRecomendations, getTopTracks } from '../../services/Spotify';
 import Loading from '../../components/Loading';
 import TracksContainer from './TracksContainer';
@@ -6,10 +6,13 @@ import ModalRecomendations, { ModalRecomendationsProps } from './ModalRecomendat
 import { useNavigate } from 'react-router-dom';
 import { Track } from '../../interfaces/Track';
 import './style.scss';
+import { SnackbarContext } from '../../providers/SnackbarProvider';
 
 function Tracks() {
   const [loading, setLoading] = useState<boolean>(false);
   const [topTracks, setTopTracks] = useState<Track[]>([]);
+
+  const { openSnackbar } = useContext(SnackbarContext);
 
   const [modal, setModal] = useState<ModalRecomendationsProps>({
     isOpen: false,
@@ -26,7 +29,7 @@ function Tracks() {
         setTopTracks(response);
       })
       .catch((e) => {
-        alert(e);
+        openSnackbar(`Error fetching top tracks: ${e}`, 'error');
       })
       .finally(() => {
         setLoading(false);
@@ -41,7 +44,7 @@ function Tracks() {
         setModal({ isOpen: true, recomendations: response })
       })
       .catch((e) => {
-        alert(e);
+        openSnackbar(`Error fetching profile recommendations: ${e}`, 'error');
       })
       .finally(() => {
         setLoading(false);
@@ -58,7 +61,7 @@ function Tracks() {
         navigate(`/playlist/${response.id}`);
       })
       .catch((e) => {
-        alert(e);
+        openSnackbar(`Error creating playlist: ${e}`, 'error');
       })
       .finally(() => {
         setLoading(false);

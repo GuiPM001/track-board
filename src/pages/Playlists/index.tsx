@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Playlist } from '../../interfaces/Playlist';
 import { getPlaylists } from '../../services/Spotify';
 import './style.scss';
 import Loading from '../../components/Loading';
 import { useNavigate } from 'react-router-dom';
+import { SnackbarContext } from '../../providers/SnackbarProvider';
 
 function Playlists() {
   const [loading, setLoading] = useState<boolean>();
   const [playlists, setPlaylists] = useState<Playlist[]>();
+  
+  const { openSnackbar } = useContext(SnackbarContext);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,7 +22,7 @@ function Playlists() {
         setPlaylists(response.sort((a, b) => a.name.localeCompare(b.name)));
       })
       .catch((e) => {
-        alert(e);
+        openSnackbar(`Error fetching playlists: ${e}`, 'error');
       })
       .finally(() => {
         setLoading(false);

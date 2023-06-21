@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Playlist } from '../../interfaces/Playlist';
 import { getPlaylist } from '../../services/Spotify';
@@ -9,12 +9,16 @@ import './style.scss';
 import IconButton from '@mui/material/IconButton';
 import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
+import { SnackbarContext } from '../../providers/SnackbarProvider';
 
 function PlaylistDetails() {
   const { id } = useParams();
   const [playlist, setPlaylist] = useState<Playlist>();
   const [loading, setLoading] = useState<boolean>(false);
   const [playing, setPlaying] = useState<string>('');
+  
+  const { openSnackbar } = useContext(SnackbarContext);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +31,7 @@ function PlaylistDetails() {
         setPlaying(response.tracks.items[0].track.id);
       })
       .catch((e) => {
-        console.log(e);
+        openSnackbar(`Error fetching playlist: ${e}`, 'error');
       })
       .finally(() => {
         setLoading(false);
