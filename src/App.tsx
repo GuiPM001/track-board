@@ -5,6 +5,7 @@ import Router from './router';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './styles/theme';
 import './styles/sharedStyles.scss';
+import { SnackbarProvider } from './providers/SnackbarProvider';
 
 function App() {
   let usuarioAutenticado = checkAuth();
@@ -20,7 +21,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Router />
+      <SnackbarProvider>
+        <Router />
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }
