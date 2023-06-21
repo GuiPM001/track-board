@@ -42,11 +42,14 @@
   div {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 
     .playlist_name {
       color: #1ED760;
       font-size: 26px;
       font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 

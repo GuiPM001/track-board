@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createPlaylist, getRecomendations, getTopTracks } from '../../services/Spotify';
 import Loading from '../../components/Loading';
 import TracksContainer from './TracksContainer';
-import RecomendationsContainer from './RecomendationsContainer';
+import ModalRecomendations, { ModalRecomendationsProps } from './ModalRecomendations';
 import { useNavigate } from 'react-router-dom';
 import { Track } from '../../interfaces/Track';
 import './style.scss';
@@ -10,7 +10,11 @@ import './style.scss';
 function Tracks() {
   const [loading, setLoading] = useState<boolean>(false);
   const [topTracks, setTopTracks] = useState<Track[]>([]);
-  const [recomendations, setRecomendations] = useState<Track[]>([]);
+
+  const [modal, setModal] = useState<ModalRecomendationsProps>({
+    isOpen: false,
+    recomendations: []
+  });
 
   const navigate = useNavigate();
 
@@ -30,13 +34,11 @@ function Tracks() {
   }, []);
 
   function fetchRecomendations() {
-    setLoading(true);
-
     let tracksIds = topTracks.map(t => t.id);
 
     getRecomendations(tracksIds)
       .then((response) => {
-        setRecomendations(response);
+        setModal({ isOpen: true, recomendations: response })
       })
       .catch((e) => {
         alert(e);
@@ -49,7 +51,7 @@ function Tracks() {
   function addNewPlaylist() {
     setLoading(true);
 
-    let tracksIds = recomendations.map(r => r.id);
+    let tracksIds = modal.recomendations.map(r => r.id);
 
     createPlaylist(tracksIds)
       .then((response) => {
@@ -61,6 +63,10 @@ function Tracks() {
       .finally(() => {
         setLoading(false);
       });
+  }
+
+  function closeModal() {
+    setModal({ isOpen: false, recomendations: [] });
   }
 
   if (loading)
@@ -75,10 +81,12 @@ function Tracks() {
         />
       )}
 
-      {recomendations.length !== 0 && (
-        <RecomendationsContainer
-          recomendations={recomendations}
+      {modal.isOpen && (
+        <ModalRecomendations
+          recomendations={modal.recomendations}
           onAddNewPlaylist={addNewPlaylist}
+          isOpen={modal.isOpen}
+          closeModal={closeModal}
         />
       )}
     </div>

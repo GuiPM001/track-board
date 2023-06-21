@@ -1,0 +1,56 @@
+.recomendation_container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 260px;
+  z-index: 5;
+  backdrop-filter: blur(1.5px);
+
+  .container_button {
+    margin-bottom: 70px;
+    width: 100%;
+  }
+}
+
+.content {
+  height: 80%;
+  margin: 70px 50px 50px 50px;
+  overflow-y: scroll;
+  background-color: #282828;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px #D2D2D2;
+}
+
+.recomendation_list {
+  list-style-type: none;
+  width: 90%;
+  margin: 0;
+  padding: 95px 0 0 30px;
+  display: grid;
+  grid-row-gap: 15px;
+  grid-column-gap: 30px;
+  grid-template-columns: auto auto;
+  grid-auto-flow: row;
+}
+
+.header {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 30px;
+  width: 85%;
+  height: 80px;
+  background-color: #282828;
+  border-radius: 5px;
+}
+
+.playlist_name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.close_button {
+  color: #D2D2D2 !important;
+}

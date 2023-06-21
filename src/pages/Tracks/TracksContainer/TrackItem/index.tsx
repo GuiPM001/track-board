@@ -1,18 +1,19 @@
 import React from 'react';
-import { Track } from '../../interfaces/Track';
-import '../sharedStyles.scss';
+import { Track } from '../../../../interfaces/Track';
 import './style.scss';
 
-interface RecomendationItemProps {
+interface TrackItemProps {
   track: Track;
+  index: number;
 }
 
-function RecomendationItem(props: RecomendationItemProps) {
-  const { track } = props;
+function TrackItem(props: TrackItemProps) {
+  const { track, index } = props;
 
   return (
     <li className='list_item' key={track.id}>
-      <img src={track.album.images[1].url} className='recomendation_image' />
+      <span className='track_index'>{index + 1}</span>
+      <img src={track.album.images[1].url} className='track_image'/>
       <div className='track_details'>
         <span className='name'>{track.name}</span>
         <span className='artists'>{track.artists.map(artist => artist.name).join(', ')}</span>
@@ -21,4 +22,4 @@ function RecomendationItem(props: RecomendationItemProps) {
   );
 }
 
-export default RecomendationItem;
+export default TrackItem;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import { Track } from '../../../interfaces/Track';
-import TrackItem from '../../../components/TrackItem';
+import TrackItem from './TrackItem';
 import './style.scss';
 
 interface TracksContainerProps {

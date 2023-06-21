@@ -4,6 +4,7 @@ import { authUser, checkAuth } from './services/Auth';
 import Router from './router';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './styles/theme';
+import './styles/sharedStyles.scss';
 
 function App() {
   let usuarioAutenticado = checkAuth();
