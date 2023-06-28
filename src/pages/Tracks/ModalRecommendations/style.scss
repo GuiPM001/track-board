@@ -1,0 +1,43 @@
+.content {
+  overflow-y: scroll;
+  background-color: #282828;
+}
+
+.recommendation_list {
+  list-style-type: none;
+  width: 90%;
+  margin: 0;
+  display: grid;
+  grid-row-gap: 5px;
+  grid-column-gap: 30px;
+  grid-template-columns: auto auto;
+  grid-auto-flow: row;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #282828;
+
+  .title {
+    color: white;
+    font-size: 26px;
+    margin: 0;
+  }
+}
+
+.actions {
+  background-color: #282828;
+}
+
+.playlist_name {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.close_button {
+  color: white !important;
+}
+

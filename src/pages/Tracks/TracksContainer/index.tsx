@@ -6,11 +6,11 @@ import './style.scss';
 
 interface TracksContainerProps {
   topTracks: Track[];
-  onFetchRecomendations: () => void;
+  onFetchRecommendations: () => void;
 }
 
 function TracksContainer(props: TracksContainerProps) {
-  const { topTracks, onFetchRecomendations } = props;
+  const { topTracks, onFetchRecommendations } = props;
 
   return (
     <div>
@@ -23,8 +23,8 @@ function TracksContainer(props: TracksContainerProps) {
       <div className='container_button'>
         <Button
           variant='contained'
-          className='btnRecomendations'
-          onClick={onFetchRecomendations}
+          className='btnRecommendations'
+          onClick={onFetchRecommendations}
         >
           Get recommendations
         </Button>

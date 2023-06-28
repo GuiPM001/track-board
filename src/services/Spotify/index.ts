@@ -41,7 +41,7 @@ export async function getFollowArtists(): Promise<Artist[]> {
   return response.data.artists.items;
 }
 
-export async function getRecomendations(tracksIds: string[]): Promise<Track[]> {
+export async function getRecommendations(tracksIds: string[]): Promise<Track[]> {
   let response = await fetchApi(
     `recommendations?limit=10&seed_tracks=${tracksIds.slice(0, 5).join(',')}`, 
     'GET'

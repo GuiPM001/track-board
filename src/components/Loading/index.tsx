@@ -1,10 +1,10 @@
 import React from 'react';
-import './style.scss';
+import styles from './style.module.scss';
 
 function Loading() {
   return (
-    <div className='background'>
-      <div className='stroke'>
+    <div className={styles.background}>
+      <div className={styles.stroke}>
         <div></div>
         <div>
           <div></div>

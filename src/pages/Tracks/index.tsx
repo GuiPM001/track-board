@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { createPlaylist, getRecomendations, getTopTracks } from '../../services/Spotify';
+import { createPlaylist, getRecommendations, getTopTracks } from '../../services/Spotify';
 import Loading from '../../components/Loading';
 import TracksContainer from './TracksContainer';
-import ModalRecomendations, { ModalRecomendationsProps } from './ModalRecomendations';
+import ModalRecommendations, { ModalRecommendationsProps } from './ModalRecommendations';
 import { useNavigate } from 'react-router-dom';
 import { Track } from '../../interfaces/Track';
 import './style.scss';
@@ -14,9 +14,9 @@ function Tracks() {
 
   const { openSnackbar } = useContext(SnackbarContext);
 
-  const [modal, setModal] = useState<ModalRecomendationsProps>({
+  const [modal, setModal] = useState<ModalRecommendationsProps>({
     isOpen: false,
-    recomendations: []
+    recommendations: []
   });
 
   const navigate = useNavigate();
@@ -36,12 +36,12 @@ function Tracks() {
       });
   }, []);
 
-  function fetchRecomendations() {
+  function fetchRecommendations() {
     let tracksIds = topTracks.map(t => t.id);
 
-    getRecomendations(tracksIds)
+    getRecommendations(tracksIds)
       .then((response) => {
-        setModal({ isOpen: true, recomendations: response })
+        setModal({ isOpen: true, recommendations: response })
       })
       .catch((e) => {
         openSnackbar(`Error fetching profile recommendations: ${e}`, 'error');
@@ -54,7 +54,7 @@ function Tracks() {
   function addNewPlaylist() {
     setLoading(true);
 
-    let tracksIds = modal.recomendations.map(r => r.id);
+    let tracksIds = modal.recommendations.map(r => r.id);
 
     createPlaylist(tracksIds)
       .then((response) => {
@@ -69,7 +69,7 @@ function Tracks() {
   }
 
   function closeModal() {
-    setModal({ isOpen: false, recomendations: [] });
+    setModal({ isOpen: false, recommendations: [] });
   }
 
   if (loading)
@@ -80,13 +80,13 @@ function Tracks() {
       {topTracks.length !== 0 && (
         <TracksContainer
           topTracks={topTracks}
-          onFetchRecomendations={fetchRecomendations}
+          onFetchRecommendations={fetchRecommendations}
         />
       )}
 
       {modal.isOpen && (
-        <ModalRecomendations
-          recomendations={modal.recomendations}
+        <ModalRecommendations
+          recommendations={modal.recommendations}
           onAddNewPlaylist={addNewPlaylist}
           isOpen={modal.isOpen}
           closeModal={closeModal}
