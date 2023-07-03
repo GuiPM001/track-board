@@ -9,7 +9,7 @@ import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 function MainLayout() {
   return (
     <div className='container'>
-      <nav className='sideBar'>
+      <nav className='nav'>
         <NavLink to='/' >
           <AccountCircleIcon />
           Profile
@@ -24,17 +24,6 @@ function MainLayout() {
         </NavLink>
       </nav>
 
-      <nav className='navBottom'>
-        <NavLink to='/' >
-          <AccountCircleIcon />
-        </NavLink>
-        <NavLink to='/tracks' >
-          <MusicNoteRoundedIcon />
-        </NavLink>
-        <NavLink to='/playlists' >
-          <FormatListBulletedRoundedIcon />
-        </NavLink>
-      </nav>
       <Outlet />
     </div>
   )

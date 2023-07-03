@@ -35,7 +35,7 @@ function Profile() {
   return (
     <div className='profile_container'>
       <div className='user_overview'>
-        <img src={user?.images[0].url}/>
+        <img src={user?.images[1].url}/>
         <h1>{user?.display_name}</h1>
       </div>
       
@@ -43,12 +43,12 @@ function Profile() {
         <div className='info'>
           <div className='grid'>
             <p><span>User ID:</span> {user?.id}</p>
-            <p><span>Subscription:</span> {user?.product}</p>
+            <p><span>Email:</span> {user?.email}</p>
           </div>
 
           <div className='grid'>
+            <p><span>Subscription:</span> {user?.product}</p>
             <p><span>Followers:</span> {user?.followers.total}</p>
-            <p><span>Email:</span> {user?.email}</p>
           </div>
         </div>
 

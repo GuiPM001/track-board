@@ -15,7 +15,9 @@ function Wrapper(props: WrapperProps) {
       
       {/* TODO: adicionar componente de loading aqui, pra não precisar
       colocar o loading em todas as paginas */}
-      {children}
+      <div className='children'>
+        {children}
+      </div>
     </div>
   )
 }
