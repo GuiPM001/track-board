@@ -70,7 +70,7 @@ async function fetchAccessToken(code: string) {
   params.append("client_id", clientId);
   params.append("grant_type", "authorization_code");
   params.append("code", code);
-  params.append("redirect_uri", "http://localhost:3000");
+  params.append("redirect_uri", "https://track-board.vercel.app");
   params.append("code_verifier", verifier!);
 
   var response = await axios('https://accounts.spotify.com/api/token', {
