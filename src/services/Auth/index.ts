@@ -45,7 +45,7 @@ async function redirectToAuthCodeFlow() {
   const params = new URLSearchParams();
   params.append("client_id", clientId);
   params.append("response_type", "code");
-  params.append("redirect_uri", "http://localhost:3000");
+  params.append("redirect_uri", "https://track-board.vercel.app");
   params.append("code_challenge_method", "S256");
   params.append("code_challenge", challenge);
   params.append(
