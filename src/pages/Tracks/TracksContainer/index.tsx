@@ -26,7 +26,7 @@ function TracksContainer(props: TracksContainerProps) {
           className='btnRecommendations'
           onClick={onFetchRecommendations}
         >
-          Get recommendations
+          Recommendations
         </Button>
       </div>
     </div>

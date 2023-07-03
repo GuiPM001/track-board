@@ -17,6 +17,10 @@
   justify-content: space-around;
   align-items: center;
   padding-inline: 50px;
+  
+  h1 {
+    font-size: 22px;
+  }
 }
 
 .details {
@@ -78,6 +82,12 @@
 }
 
 @media screen and (max-width: 990px) {
+  .user_overview {
+    h1 {
+      font-size: 20px;
+    }
+  }
+
   .profile_container {
     flex-wrap: wrap;
   }

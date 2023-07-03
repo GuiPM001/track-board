@@ -18,7 +18,7 @@
   }
 
   .children {
-    margin-top: 50px;
+    margin-top: 100px;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -32,10 +32,10 @@
     overflow-y: scroll;
     margin-bottom: 65px;
     
-
     .title {
       padding-top: 20px;
       margin-top: 0px;
+      margin-left: 5vw;
       width: 90%;
     }
   
