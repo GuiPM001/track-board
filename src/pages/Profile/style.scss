@@ -37,11 +37,8 @@
       height: 100%;
   
       p {
-        font-weight: 700 !important;
-
         span {
-          font-weight: 700;
-          color: #D2D2D2;
+          font-weight: 700
         }
       }
     }
@@ -74,7 +71,7 @@
     img {
       border-radius: 100%;
       width: 5vw;
-      min-width: 30px;
+      min-width: 35px;
       max-width: 60px;
     }
   }
