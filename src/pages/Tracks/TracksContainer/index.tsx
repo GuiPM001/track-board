@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from '@mui/material/Button';
 import { Track } from '../../../interfaces/Track';
-import TrackItem from './TrackItem';
+import TrackItem from '../TrackItem';
 import './style.scss';
 
 interface TracksContainerProps {
@@ -23,7 +23,7 @@ function TracksContainer(props: TracksContainerProps) {
       <div className='container_button'>
         <Button
           variant='contained'
-          className='btnRecommendations'
+          className='btn_recommendations'
           onClick={onFetchRecommendations}
         >
           Recommendations

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Track } from '../../../../interfaces/Track';
+import { Track } from '../../../interfaces/Track';
 import './style.scss';
 
 interface TrackItemProps {
   track: Track;
-  index: number;
+  index?: number;
 }
 
 function TrackItem(props: TrackItemProps) {
@@ -12,7 +12,7 @@ function TrackItem(props: TrackItemProps) {
 
   return (
     <li className='list_item' key={track.id}>
-      <span className='track_index'>{index + 1}</span>
+      { index !== undefined && <span className='track_index'>{index + 1}</span> }
       <img src={track.album.images[1].url} className='track_image'/>
       <div className='track_details'>
         <span className='name'>{track.name}</span>

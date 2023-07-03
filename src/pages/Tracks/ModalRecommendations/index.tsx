@@ -1,12 +1,12 @@
 import React from 'react';
 import { Track } from '../../../interfaces/Track';
 import Button from '@mui/material/Button';
-import RecommendationItem from './RecommendationItem';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import IconButton from '@mui/material/IconButton';
 import './style.scss';
 import { Dialog, DialogActions, DialogContent, DialogTitle, useMediaQuery } from '@mui/material';
 import { theme } from '../../../styles/theme';
+import TrackItem from '../TrackItem';
 
 export interface ModalRecommendationsProps {
   recommendations: Track[];
@@ -36,7 +36,7 @@ function ModalRecommendations(props: ModalRecommendationsProps) {
       <DialogContent className='content'>
         <ul className='recommendation_list'>
           {recommendations.map(track => (
-            <RecommendationItem track={track} />
+            <TrackItem track={track} />
           ))}
         </ul>
       </DialogContent>
@@ -44,10 +44,10 @@ function ModalRecommendations(props: ModalRecommendationsProps) {
       <DialogActions className='actions'>
         <Button
           variant='contained'
-          className='btnRecommendations'
+          className='btn_add'
           onClick={onAddNewPlaylist}
         >
-          + Add to a new playlist
+          Create Playlist
         </Button>
       </DialogActions>
     </Dialog>

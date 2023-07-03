@@ -37,6 +37,8 @@ function Tracks() {
   }, []);
 
   function fetchRecommendations() {
+    setLoading(true);
+    
     let tracksIds = topTracks.map(t => t.id);
 
     getRecommendations(tracksIds)
