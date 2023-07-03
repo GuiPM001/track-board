@@ -2,11 +2,12 @@ import axios from 'axios';
 
 const clientId: string = '4abfd39315f0438588b4f05e2bd84f54';
 
-export function checkAuth(): boolean {
+function checkAuth(): boolean {
   var authToken = localStorage.getItem('auth_token');
 
   if (authToken) {
     var token = JSON.parse(authToken);
+
     if (new Date().getTime() > token.expiry)
       return false;
 
@@ -16,7 +17,7 @@ export function checkAuth(): boolean {
   return false;
 }
 
-export async function authUser(): Promise<void> {
+async function authUser(): Promise<void> {
   let rotaAtual = window.location.href;
   const params = new URLSearchParams(window.location.search);
   const code = params.get('code');
@@ -30,7 +31,7 @@ export async function authUser(): Promise<void> {
   }
 }
 
-export function getAccessToken() {
+function getAccessToken() {
   var token = JSON.parse(localStorage.getItem('auth_token')!);
   return token.token;
 }
@@ -44,7 +45,7 @@ async function redirectToAuthCodeFlow() {
   const params = new URLSearchParams();
   params.append("client_id", clientId);
   params.append("response_type", "code");
-  params.append("redirect_uri", "https://track-board.vercel.app");
+  params.append("redirect_uri", "http://localhost:3000");
   params.append("code_challenge_method", "S256");
   params.append("code_challenge", challenge);
   params.append(
@@ -76,11 +77,13 @@ async function fetchAccessToken(code: string) {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     data: params.toString()
-  })
+  });
+
+  let tokenExpiry = new Date();
   
   const auth_token = {
     token: response.data.access_token,
-    expiry: new Date().getTime() + response.data.expires_in
+    expiry: tokenExpiry.setSeconds(tokenExpiry.getSeconds() + 3600)
   }
 
   localStorage.setItem('auth_token', JSON.stringify(auth_token));
@@ -104,3 +107,11 @@ async function generateCodeChallenge(codeVerifier: string) {
       .replace(/\//g, '_')
       .replace(/=+$/, '');
 }
+
+const authService = {
+  checkAuth,
+  authUser,
+  getAccessToken
+}
+
+export default authService;

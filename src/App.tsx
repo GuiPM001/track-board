@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import './App.css';
-import { authUser, checkAuth } from './services/Auth';
+import authService from './services/Auth';
 import Router from './router';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './styles/theme';
@@ -8,12 +7,13 @@ import './styles/sharedStyles.scss';
 import { SnackbarProvider } from './providers/SnackbarProvider';
 
 function App() {
-  let usuarioAutenticado = checkAuth();
+  let usuarioAutenticado = authService.checkAuth();
 
   useEffect(() => {
     async function authentication() {
-      if (!usuarioAutenticado)
-        authUser();
+      if (!usuarioAutenticado) {
+        authService.authUser();
+      }
     }
     
     authentication();

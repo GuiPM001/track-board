@@ -1,12 +1,12 @@
 import axios from "axios";
 import { UserProfile } from "../../interfaces/UserProfile";
-import { getAccessToken } from "../Auth";
+import authService from "../Auth";
 import { Track } from "../../interfaces/Track";
 import { Playlist } from "../../interfaces/Playlist";
 import { Artist } from "../../interfaces/Artist";
 
 async function fetchApi(endpoint: string, method: string, body?: any) {
-  var accessToken = getAccessToken();
+  var accessToken = authService.getAccessToken();
 
   let response = await axios(`https://api.spotify.com/v1/${endpoint}`, {
     method: method,
