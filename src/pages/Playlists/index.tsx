@@ -46,7 +46,7 @@ function Playlists() {
             key={playlist.id}
           >
             <img src={playlist?.images[0]?.url} className='playlist_image'/> 
-            <div>
+            <div className='playlist_details'>
               <span className='playlist_name'>{playlist.name}</span>
               <span className='playlist_tracks'>Total songs: {playlist.tracks.total}</span>
             </div>

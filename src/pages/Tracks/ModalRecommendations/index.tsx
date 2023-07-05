@@ -51,34 +51,6 @@ function ModalRecommendations(props: ModalRecommendationsProps) {
         </Button>
       </DialogActions>
     </Dialog>
-    // <div className='recommendation_container'>
-    //   <div className='content'>
-
-    //     <div className='header'>
-          // <h1>Recommendations</h1>
-
-          // <IconButton onClick={closeModal} className='close_button'>
-          //   <CloseRoundedIcon />
-          // </IconButton>
-    //     </div>
-        
-    //     <ul className='recommendation_list'>
-    //       {recommendations.map(track => (
-    //         <RecommendationItem track={track} />
-    //       ))}
-    //     </ul>
-
-    //     <div className='container_button'>
-    //       <Button
-    //         variant='contained'
-    //         className='btnRecommendations'
-    //         onClick={onAddNewPlaylist}
-    //       >
-    //         + Add to a new playlist
-    //       </Button>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
 
