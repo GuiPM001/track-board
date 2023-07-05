@@ -64,9 +64,8 @@ function PlaylistDetails() {
         </div>
       </div>
 
-      <div className='line'></div>
-
       <div className='tracks'>
+        <h1 className='tracks_title'>Tracks</h1>
         <ul>
           {playlist?.tracks.items.map(item =>
             <li 
@@ -82,11 +81,11 @@ function PlaylistDetails() {
             </li>
           )}
         </ul>
-        
-        <div className='playbar_container'>
+      </div>
+
+      <div className='playbar_container'>
           <Playbar trackId={playing} />
         </div>
-      </div>
     </div>
   )
 }

@@ -1,19 +1,35 @@
 .container_details {
   display: flex;
+  height: 100%;
+  width: 100%;
   flex-direction: row;
   align-items: center;
   overflow-y: hidden;
+  margin-bottom: 80px;
 
   .overview {
-    width: 430px;
-    height: 100%;
-    margin-left: 30px;
-    margin-top: 40px;
+    width: 41%;
     display: flex;
     flex-direction: column;
+    position: fixed;
+    top: 15vh;
+
+    .back_button {
+      position: absolute;
+      color: #D2D2D2;
+      margin-top: -70px;
+      margin-left: 5px;
+      border-radius: 10px;
+      background-color: #282828;
+      display: flex;
+      justify-content: flex-start;
+    
+      svg {
+        font-size: 28px;
+      }
+    }
 
     .emphasis {
-      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -21,12 +37,12 @@
 
       img {
         border-radius: 10px;
-        height: 200px;
-        width: 200px;
+        width: 20vw;
+        min-width: 150px;
+        max-height: 20vw;
       }
 
       .playlist_name {
-        width: 75%;
         font-size: 26px;
         font-weight: 700;
         text-align: center;
@@ -35,11 +51,8 @@
     }
 
     .details {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin-top: -75px;
+      margin-left: 5vw;
+      margin-top: 5vh;
 
       p {
         font-size: 18px;
@@ -60,20 +73,27 @@
   }
 
   .tracks {
-    overflow-y: scroll;
-    list-style-type: none;
-    max-height: 100%;
-    width: 610px;
+    width: 50%;
+    margin-left: 50%;
+    margin-top: -20px;
+
+    .tracks_title {
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 22px;
+    }
 
     ul {
-      margin-bottom: 100px;
-      margin-top: 0px;
+      margin: 0;
+      padding: 0;
+      margin-right: 5vw;
     }
 
     .list_item {
       display: flex;
       flex-direction: row;
       align-items: center;
+      margin-bottom: 5px;
 
       img {
         height: 50px;
@@ -100,28 +120,70 @@
   }
 }
 
-.line {
-  height: 95%;
-  border-left: 1px solid #D2D2D2;
-}
-
 .playbar_container {
-  border: 1px solid #D2D2D2;
-  border-radius: 15px 15px 0px 0px;
-  position: fixed;
-  bottom: 40px;
-  right: 30px;
-  height: 80px;
-  border-bottom: none;
+  position: absolute;
+  bottom: 2vh;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  border-top: 0.5vw solid #121212;
 }
 
-.back_button {
-  position: absolute !important;
-  top: 50px;
-  left: 265px;
-  color: #D2D2D2 !important;
+@media screen and (max-width: 990px) {
+  .container_details {
+    flex-direction: column;
+    margin-bottom: 60px;
 
-  svg {
-    font-size: 30px;
+    .overview {
+      margin-left: 0;
+      position: inherit;
+      width: 100%;
+      margin-bottom: 2vh;
+      margin-top: 20px;
+
+      .details {
+        padding: 0;
+        margin-top: 2vh;
+      }
+
+      .emphasis {
+        margin-inline: 5vw;
+
+        img {
+          width: 20vw;
+          min-width: 150px;
+        }
+      }
+
+      .back_button {
+        margin-top: -55px;
+      
+        svg {
+          font-size: 24px;
+        }
+      }
+    }
+
+    .tracks {
+      width: 100%;
+      margin-left: 0;
+      margin-top: 2vh;
+
+      .tracks_title {
+        margin-left: 5vw;
+        margin-top: 0;
+        font-size: 20px;
+      }
+
+      ul {
+        margin-inline: 5vw;
+      }
+    }
+  }
+
+  .playbar_container {
+    bottom: 7.7vh;
+    border-top: none;
   }
 }
