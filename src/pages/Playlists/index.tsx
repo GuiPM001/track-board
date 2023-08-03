@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Playlist } from '../../interfaces/Playlist';
-import { getPlaylists } from '../../services/Spotify';
 import './style.scss';
 import Loading from '../../components/Loading';
 import { useNavigate } from 'react-router-dom';
 import { SnackbarContext } from '../../providers/SnackbarProvider';
+import playlistService from '../../services/Spotify/Playlist';
 
 function Playlists() {
   const [loading, setLoading] = useState<boolean>();
@@ -17,7 +17,7 @@ function Playlists() {
   useEffect(() => {
     setLoading(true);
 
-    getPlaylists()
+    playlistService.getPlaylists()
       .then((response) => {
         setPlaylists(response.sort((a, b) => a.name.localeCompare(b.name)));
       })
@@ -37,7 +37,7 @@ function Playlists() {
     return <Loading />
 
   return (
-    <div className='playlist_container'>
+    <div className='page_container'>
       <ul className='list'>
         {playlists?.map((playlist) => 
           <li 

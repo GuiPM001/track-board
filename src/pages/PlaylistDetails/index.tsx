@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Playlist } from '../../interfaces/Playlist';
-import { getPlaylist } from '../../services/Spotify';
 import Loading from '../../components/Loading';
 import Playbar from '../../components/Playbar';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
@@ -10,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import PublicRoundedIcon from '@mui/icons-material/PublicRounded';
 import LockRoundedIcon from '@mui/icons-material/LockRounded';
 import { SnackbarContext } from '../../providers/SnackbarProvider';
+import playlistService from '../../services/Spotify/Playlist';
 
 function PlaylistDetails() {
   const { id } = useParams();
@@ -24,7 +24,7 @@ function PlaylistDetails() {
   useEffect(() => {
     setLoading(true);
 
-    getPlaylist(id!)
+    playlistService.getPlaylist(id!)
       .then((response) => {
         console.log(response)
         setPlaylist(response);

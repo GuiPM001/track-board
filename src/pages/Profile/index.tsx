@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserProfile } from '../../interfaces/UserProfile';
-import { getFollowArtists, getProfile, getTopTracks } from '../../services/Spotify';
 import Loading from '../../components/Loading';
 import './style.scss';
 import { Artist } from '../../interfaces/Artist';
 import { SnackbarContext } from '../../providers/SnackbarProvider';
+import artistService from '../../services/Spotify/Artist';
+import profileService from '../../services/Spotify/Profile';
 
 function Profile() {
   const [user, setUser] = useState<UserProfile>();
@@ -16,7 +17,7 @@ function Profile() {
   useEffect(() => {
     setLoading(true);
 
-    Promise.all([getProfile(), getFollowArtists()])
+    Promise.all([profileService.getProfile(), artistService.getFollowArtists()])
     .then(results => {
       setUser(results[0]);
       setArtists(results[1]);

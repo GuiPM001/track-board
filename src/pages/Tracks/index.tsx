@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { createPlaylist, getRecommendations, getTopTracks } from '../../services/Spotify';
 import Loading from '../../components/Loading';
 import TracksContainer from './TracksContainer';
 import ModalRecommendations, { ModalRecommendationsProps } from './ModalRecommendations';
@@ -7,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { Track } from '../../interfaces/Track';
 import './style.scss';
 import { SnackbarContext } from '../../providers/SnackbarProvider';
+import trackService from '../../services/Spotify/Track';
+import playlistService from '../../services/Spotify/Playlist';
 
 function Tracks() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,7 +25,7 @@ function Tracks() {
   useEffect(() => {
     setLoading(true);
     
-    getTopTracks()
+    trackService.getTopTracks()
       .then((response) => {
         setTopTracks(response);
       })
@@ -41,7 +42,7 @@ function Tracks() {
     
     let tracksIds = topTracks.map(t => t.id);
 
-    getRecommendations(tracksIds)
+    trackService.getRecommendations(tracksIds)
       .then((response) => {
         setModal({ isOpen: true, recommendations: response })
       })
@@ -58,7 +59,7 @@ function Tracks() {
 
     let tracksIds = modal.recommendations.map(r => r.id);
 
-    createPlaylist(tracksIds)
+    playlistService.createPlaylist(tracksIds)
       .then((response) => {
         navigate(`/playlist/${response.id}`);
       })
