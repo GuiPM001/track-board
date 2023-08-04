@@ -18,16 +18,16 @@ function Profile() {
     setLoading(true);
 
     Promise.all([profileService.getProfile(), artistService.getFollowArtists()])
-    .then(results => {
-      setUser(results[0]);
-      setArtists(results[1]);
-    })
-    .catch((e) => {
-      openSnackbar(`Error fetching profile information: ${e}`, 'error');
-    })
-    .finally(() => {
-      setLoading(false);
-    })
+      .then(results => {
+        setUser(results[0]);
+        setArtists(results[1]);
+      })
+      .catch((e) => {
+        openSnackbar(`Error fetching profile information: ${e}`, 'error');
+      })
+      .finally(() => {
+        setLoading(false);
+      })
   }, []);
 
   if (loading)
@@ -57,11 +57,13 @@ function Profile() {
           <p>Top artists</p>
           <div className='artists_row'>
             {
-              artists.map(artist => 
+              artists?.map(artist => 
                 <a 
                   href={artist.uri} 
                   target='_blank'
                   className='artist'
+                  placeholder={artist.uri}
+                  key={artist.id}
                 >
                   <img src={artist.images[2].url}/>
                 </a>

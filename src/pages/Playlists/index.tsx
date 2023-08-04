@@ -30,7 +30,7 @@ function Playlists() {
   }, []);
 
   function goToPlaylist(playlist: Playlist) {
-    navigate(`/playlist/${playlist.id}`)
+    navigate(`/playlist/${playlist.id}`);
   }
 
   if (loading)
