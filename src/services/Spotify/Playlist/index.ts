@@ -12,7 +12,7 @@ async function getPlaylists(): Promise<Playlist[]> {
   return response.data.items;
 } 
 
-async function getPlaylist(playlistId: string): Promise<Playlist> {
+async function getPlaylistDetails(playlistId: string): Promise<Playlist> {
   let response = await fetchApi(
     `playlists/${playlistId}`,
     'GET'
@@ -40,7 +40,7 @@ async function createPlaylist(tracksIds: string[]): Promise<Playlist> {
 
 const playlistService = {
   getPlaylists,
-  getPlaylist,
+  getPlaylistDetails,
   createPlaylist
 }
 

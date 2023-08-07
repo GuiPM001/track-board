@@ -11,7 +11,7 @@ jest.mock('../../services/Spotify/Playlist', () => ({
   getPlaylists: jest.fn()
 }));
 
-const navigateMock = jest.fn()
+const navigateMock = jest.fn();
 
 const imagesMock: Image[] = [
   {url: 'image1', height: 50, width: 50}, 

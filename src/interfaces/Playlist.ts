@@ -10,10 +10,10 @@ export interface Playlist {
   owner: { display_name: string };
 }
 
-interface PlaylistTrack {
-  href: string;
+export interface PlaylistTrack {
+  href?: string;
   total: number;
-  items: Item[];
+  items?: Item[];
 }
 
 interface Item {

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Playlist } from '../../interfaces/Playlist';
+import { Playlist, PlaylistTrack } from '../../interfaces/Playlist';
 import Loading from '../../components/Loading';
 import Playbar from '../../components/Playbar';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
@@ -24,11 +24,12 @@ function PlaylistDetails() {
   useEffect(() => {
     setLoading(true);
 
-    playlistService.getPlaylist(id!)
+    playlistService.getPlaylistDetails(id!)
       .then((response) => {
-        console.log(response)
         setPlaylist(response);
-        setPlaying(response.tracks.items[0].track.id);
+
+        if (response.tracks.items)
+          setPlaying(response.tracks.items[0].track.id);
       })
       .catch((e) => {
         openSnackbar(`Error fetching playlist: ${e}`, 'error');
@@ -38,18 +39,49 @@ function PlaylistDetails() {
       })
   }, []);
 
+  function playlistItems(playlistTrack: PlaylistTrack | undefined) {
+    if (playlistTrack?.items?.length) {
+      return (
+        <ul data-testid='track-list'>
+          {playlistTrack.items.map(item =>
+            <li 
+              key={item.track.id} 
+              className='list_item' 
+              onClick={() => setPlaying(item.track.id)}
+            >
+              <img src={item.track?.album?.images[1].url} alt='' />
+              <div className='track_details'>
+                <span className='name'>{item.track.name}</span>
+                <span className='artists'>{item.track.artists?.map(artist => artist.name).join(', ')}</span>
+              </div>
+            </li>
+          )}
+        </ul>
+      )
+    }
+
+    return (
+      <p>Playlist has no tracks</p>
+    )
+  }
+
   if (loading)
     return <Loading />
 
   return (
     <div className='container_details'>
       <div className='overview'>
-        <IconButton className='back_button' aria-label='Back' onClick={() => navigate('/playlists')}>
+        <IconButton 
+          className='back_button' 
+          data-testid='back-button' 
+          aria-label='Back' 
+          onClick={() => navigate('/playlists')}
+        >
           <ArrowBackIosRoundedIcon />
         </IconButton>
 
         <div className='emphasis'>
-          <img src={playlist?.images[0].url} alt='' />
+          <img src={playlist?.images[0]?.url} alt='' />
           <span className='playlist_name'>{playlist?.name}</span>
         </div>
 
@@ -66,26 +98,12 @@ function PlaylistDetails() {
 
       <div className='tracks'>
         <h1 className='tracks_title'>Tracks</h1>
-        <ul>
-          {playlist?.tracks.items.map(item =>
-            <li 
-              key={item.track.id} 
-              className='list_item' 
-              onClick={() => setPlaying(item.track.id)}
-            >
-              <img src={item.track.album.images[1].url} alt='' />
-              <div className='track_details'>
-                <span className='name'>{item.track.name}</span>
-                <span className='artists'>{item.track.artists.map(artist => artist.name).join(', ')}</span>
-              </div>
-            </li>
-          )}
-        </ul>
+        {playlistItems(playlist?.tracks)}
       </div>
 
       <div className='playbar_container'>
-          <Playbar trackId={playing} />
-        </div>
+        <Playbar trackId={playing} />
+      </div>
     </div>
   )
 }

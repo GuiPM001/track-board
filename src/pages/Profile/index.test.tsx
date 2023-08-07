@@ -70,7 +70,6 @@ describe('Profile', () => {
   });
 
   test('should show error snackbar when some api response error', async () => {
-    
     jest.spyOn(profileService, 'getProfile').mockReturnValue(Promise.reject(new Error('error fetching data')));
     jest.spyOn(artistService, 'getFollowArtists').mockReturnValue(Promise.resolve(artistsMock));
     
@@ -82,7 +81,6 @@ describe('Profile', () => {
       </SnackbarContext.Provider>
     );
 
-    
     await waitFor(() => {
       expect(openSnackbarMock).toHaveBeenCalled();
     });

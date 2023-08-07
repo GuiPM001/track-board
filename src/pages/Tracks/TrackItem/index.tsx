@@ -13,10 +13,10 @@ function TrackItem(props: TrackItemProps) {
   return (
     <li className='list_item' key={track.id}>
       { index !== undefined && <span className='track_index'>{index + 1}</span> }
-      <img src={track.album.images[1].url} className='track_image'/>
+      <img src={track.album?.images[1].url} className='track_image'/>
       <div className='track_details'>
         <span className='name'>{track.name}</span>
-        <span className='artists'>{track.artists.map(artist => artist.name).join(', ')}</span>
+        <span className='artists'>{track.artists?.map(artist => artist.name).join(', ')}</span>
       </div>
     </li>
   );
