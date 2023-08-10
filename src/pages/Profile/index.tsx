@@ -36,7 +36,7 @@ function Profile() {
   return (
     <div className='profile_container'>
       <div className='user_overview'>
-        <img src={user?.images[1].url}/>
+        <img src={user?.images[1]?.url}/>
         <h1>{user?.display_name}</h1>
       </div>
       
