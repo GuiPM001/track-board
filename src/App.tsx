@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react';
 import authService from './services/Auth';
 import Router from './router';
-import { ThemeProvider } from '@mui/material';
-import { theme } from './styles/theme';
-import './styles/sharedStyles.scss';
 import { SnackbarProvider } from './providers/SnackbarProvider';
 
 function App() {
@@ -20,11 +17,9 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <SnackbarProvider>
-        <Router />
-      </SnackbarProvider>
-    </ThemeProvider>
+    <SnackbarProvider>
+      <Router />
+    </SnackbarProvider>
   );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from '../pages/Profile';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import MainLayout from '../partials/MainLayout';
+import MainLayout from '../layout/MainLayout/MainLayout';
 import Tracks from '../pages/Tracks';
 import Wrapper from '../components/Wrapper';
 import Playlists from '../pages/Playlists';

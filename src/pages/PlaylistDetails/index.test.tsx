@@ -6,6 +6,7 @@ import playlistService from "../../services/Spotify/Playlist";
 import { BrowserRouter } from "react-router-dom";
 import { SnackbarContext } from "../../providers/SnackbarProvider";
 import * as router from "react-router";
+import { Artist } from "../../interfaces/Artist";
 
 jest.mock('../../services/Spotify/Playlist', () => ({
   getPlaylistDetails: jest.fn()
@@ -73,7 +74,8 @@ describe('PlaylistDetails', () => {
   });
 
   test('should show tracks details when playlist tracks', async () => {
-    playlistMock.tracks.items = [{track: {id: '123', name: 'Mock track', duration_ms: 150}}]
+    let artistMock: Artist[] = [{id: '123', name: 'Test', uri: 'www.test.com', images: []}]
+    playlistMock.tracks.items = [{track: {id: '123', name: 'Mock track', duration_ms: 150, artists: artistMock}}]
     jest.spyOn(playlistService, 'getPlaylistDetails').mockReturnValue(Promise.resolve(playlistMock));
 
     const { getByText, getByTestId } = render(

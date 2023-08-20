@@ -5,7 +5,7 @@ export interface Track {
   id: string;
   name: string;
   duration_ms: number;
-  artists?: Artist[];
+  artists: Artist[];
   album?: Album;
 }
 

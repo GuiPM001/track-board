@@ -1,27 +1,45 @@
 import { fetchApi } from "..";
+import { RecentlyPlayed } from "../../../interfaces/RecentlyPlayed";
 import { Track } from "../../../interfaces/Track";
 
 async function getTopTracks(): Promise<Track[]> {
   let response = await fetchApi(
-    'me/top/tracks?time_range=short_term&limit=10', 
+    'me/top/tracks?time_range=short_term&limit=16', 
     'GET'
   );
 
   return response.data.items;
 }
 
-async function getRecommendations(tracksIds: string[]): Promise<Track[]> {
+async function getRecommendations(tracksIdss?: string[]): Promise<Track[]> {
+  const tracks = await fetchApi(
+    'me/top/tracks?time_range=short_term&limit=16', 
+    'GET'
+  );
+
+    const tracksIds = tracks.data.items.map((t: Track) => t.id);
+
   let response = await fetchApi(
-    `recommendations?limit=10&seed_tracks=${tracksIds.slice(0, 5).join(',')}`, 
+    `recommendations?limit=16&seed_tracks=${tracksIds.slice(0, 5).join(',')}`, 
     'GET'
   );
 
   return response.data.tracks;
 }
 
+async function getRecentlyPlayed(): Promise<RecentlyPlayed[]> {
+  let response = await fetchApi(
+    'me/player/recently-played?limit=20', 
+    'GET'
+  );
+
+  return response.data.items;
+}
+
 const trackService = {
   getTopTracks,
-  getRecommendations
+  getRecommendations,
+  getRecentlyPlayed
 }
 
 export default trackService;
