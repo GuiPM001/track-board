@@ -6,7 +6,7 @@ export interface Track {
   name: string;
   duration_ms: number;
   artists: Artist[];
-  album?: Album;
+  album: Album;
 }
 
 interface Album {

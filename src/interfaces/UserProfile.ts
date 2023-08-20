@@ -3,7 +3,7 @@ import { Image } from "./Image";
 export interface UserProfile {
   display_name: string;
   email: string;
-  followers: { href: string; total: number; };
+  followers: { total: number; };
   id: string;
   images: Image[];
   product: string;

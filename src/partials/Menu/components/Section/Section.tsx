@@ -1,4 +1,4 @@
-import Link, { LinkProps } from "./Link";
+import Link, { LinkProps } from "../Link/Link";
 
 interface SectionProps {
   title: string;

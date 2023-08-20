@@ -1,5 +1,5 @@
 import React from "react";
-import Section from "./Section";
+import Section from "../Section/Section";
 import logo from "assets/logo.png";
 import {
   faClock,
@@ -14,7 +14,7 @@ import {
 export default function Sidebar() {
   return (
     <div className="h-full w-48 py-6 pl-6 border-l md:border-r border-slate-200 fixed right-0 md:left-0 bg-white z-10">
-      <img src={logo} className="mb-10 w-32 hidden md:block" />
+      <img src={logo} alt="Logo" className="mb-10 w-32 hidden md:block" />
       <nav className="flex flex-col align-middle h-full">
         <Section
           title="Menu"

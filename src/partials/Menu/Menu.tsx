@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import logo from "assets/logo.png";
-import {
-  faBars,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import Sidebar from "./Sidebar";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import Sidebar from "./components/Sidebar/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Menu() {
@@ -16,10 +13,11 @@ export default function Menu() {
         <Sidebar />
       </div>
 
-      <div className="md:hidden fixed w-full h-16 bg-white flex flex-row items-center justify-between border-b border-slate-200 z-20">
+      <div className="md:hidden fixed w-full h-16 bg-white flex flex-row items-center justify-between border-b border-slate-200 z-20 ease-in-out duration-300">
         <img src={logo} className="w-28 ml-6" />
 
         <button
+          data-testid="openMenuBtn"
           onClick={() => setShowMobileMenu(!showMobileMenu)}
           className="mr-6"
         >
@@ -27,8 +25,12 @@ export default function Menu() {
         </button>
 
         {showMobileMenu && (
-          <div className="h-full w-screen bg-black bg-opacity-70 fixed bottom-0 flex">
+          <div
+            data-testid="mobileMenu"
+            className="h-full w-screen bg-black bg-opacity-70 fixed bottom-0 flex"
+          >
             <button
+              data-testid="closeMenuBtn"
               className="fixed right-4 top-6 z-20"
               onClick={() => setShowMobileMenu(!showMobileMenu)}
             >

@@ -7,6 +7,6 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   moduleNameMapper: {
-    "^.+\\.(css|less|scss)$": "babel-jest"
+    "\\.(png)$": "<rootDir>/src/__mocks__/fileMock.js",
   }
 };

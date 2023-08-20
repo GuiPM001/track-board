@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
-import profileService from "../../services/Spotify/Profile";
-import { UserProfile } from "../../interfaces/UserProfile";
-import { SnackbarContext } from "../../providers/SnackbarProvider";
-import noPhoto from "../../assets/no-photo.png";
+import profileService from "services/Spotify/Profile";
+import { UserProfile } from "interfaces/UserProfile";
+import { SnackbarContext } from "providers/SnackbarProvider";
+import noPhoto from "assets/no-photo.png";
 
 export default function Profile() {
   const [user, setUser] = useState<UserProfile>();

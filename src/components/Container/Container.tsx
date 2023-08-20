@@ -6,7 +6,7 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 interface ContainerProps {
   title: string;
   items: Track[];
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export default function Container(props: ContainerProps) {
@@ -40,6 +40,7 @@ export default function Container(props: ContainerProps) {
 
         {seeAll && (
           <button
+            data-testid="seeLessBtn"
             onClick={seeLess}
             className="font-bold text-slate-400 hover:text-emerald-500 active:scale-95 transition duration-150 ease-in-out"
           >
@@ -59,7 +60,7 @@ export default function Container(props: ContainerProps) {
           {props.children}
         </div>
       ) : (
-        <div>No data for top tracks</div>
+        <div>No data</div>
       )}
     </section>
   );
