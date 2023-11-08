@@ -27,7 +27,7 @@ const profileMock: UserProfile = {
   email: 'ameil@test.com',
   product: 'premium',
   images: imagesMock,
-  followers: { href: 'link', total: 5}
+  followers: { total: 5}
 }
 
 const artistsMock: Artist[] = [
