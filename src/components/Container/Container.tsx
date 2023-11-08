@@ -24,7 +24,7 @@ export default function Container(props: ContainerProps) {
   }
 
   return (
-    <section className="w-full border border-slate-200 rounded-lg px-4 pt-4 mb-6">
+    <section className="w-full border border-slate-200 md:rounded-lg px-4 pt-4 mb-6">
       <div className="flex justify-between mb-4">
         <h1 className="font-bold text-lg">{props.title}</h1>
 
@@ -60,7 +60,9 @@ export default function Container(props: ContainerProps) {
           {props.children}
         </div>
       ) : (
-        <div>No data</div>
+        <p className="flex justify-center items-center pb-12">
+          No data
+        </p>
       )}
     </section>
   );

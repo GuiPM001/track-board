@@ -7,7 +7,7 @@ export default function Player() {
   const srcEmbed = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`;
 
   return (
-    <section className="h-full w-full justify-center items-center lg:mt-3 bg-[#282828] rounded-t-xl lg:bg-transparent">
+    <section className="h-full lg:h-auto w-full justify-center items-center lg:mt-3 bg-[#282828] rounded-t-xl lg:bg-transparent">
       {trackId ? (
         <div className="h-full w-full rounded-t-xl lg:rounded-xl flex flex-col items-center lg:pt-12">
           <iframe

@@ -9,7 +9,7 @@ export default function Menu() {
 
   return (
     <>
-      <div className="hidden md:block">
+      <div className="hidden md:block col-span-3 lg:col-span-2 border-l md:border-r border-slate-200 bg-white z-10">
         <Sidebar />
       </div>
 

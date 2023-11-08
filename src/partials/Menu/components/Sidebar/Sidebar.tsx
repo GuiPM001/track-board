@@ -13,7 +13,7 @@ import {
 
 export default function Sidebar() {
   return (
-    <div className="h-full w-48 py-6 pl-6 border-l md:border-r border-slate-200 fixed right-0 md:left-0 bg-white z-10">
+    <div className="p-6 bg-white h-full md:h-auto fixed right-0 md:static">
       <img src={logo} alt="Logo" className="mb-10 w-32 hidden md:block" />
       <nav className="flex flex-col align-middle h-full">
         <Section

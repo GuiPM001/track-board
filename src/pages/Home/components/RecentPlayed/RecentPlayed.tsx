@@ -50,7 +50,7 @@ export default function RecentPlayed() {
                 src={track.album?.images[1].url}
               />
 
-              <div className="flex flex-col max-w-[90px] md:max-w-none">
+              <div className="flex flex-col max-w-xs">
                 <span className="font-bold overflow-hidden text-ellipsis">{track.name}</span>
                 <span className="text-sm font-semibold text-slate-400 overflow-hidden text-ellipsis">
                   {track.artists?.map((a) => a.name).join(", ")}
