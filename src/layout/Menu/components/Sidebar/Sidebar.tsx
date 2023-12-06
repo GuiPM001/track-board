@@ -17,17 +17,10 @@ export default function Sidebar() {
       <img src={logo} alt="Logo" className="mb-10 w-32 hidden md:block" />
       <nav className="flex flex-col align-middle h-full">
         <Section
-          title="Menu"
-          links={[
-            { icon: faHouse, name: "home", route: "/" },
-            { icon: faUser, name: "profile", route: "/profile" },
-          ]}
-        />
-
-        <Section
           title="Library"
           links={[
-            { icon: faClock, name: "recent", route: "/recent-played" },
+            { icon: faHouse, name: "home", route: "/" },
+            { icon: faClock, name: "recent", route: "/recent" },
             { icon: faHeart, name: "favorites", route: "/favorites" },
           ]}
         />

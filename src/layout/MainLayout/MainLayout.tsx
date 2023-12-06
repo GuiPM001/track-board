@@ -1,7 +1,7 @@
 import React from "react";
-import Menu from "partials/Menu/Menu";
-import Profile from "partials/Profile/Profile";
-import Player from "partials/Player/Player";
+import Menu from "layout/Menu/Menu";
+import Profile from "layout/Profile/Profile";
+import Player from "layout/Player/Player";
 import { PlayerProvider } from "providers/PlayerProvider";
 import { Outlet } from "react-router-dom";
 

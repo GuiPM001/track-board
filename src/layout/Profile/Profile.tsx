@@ -32,7 +32,7 @@ export default function Profile() {
       <div className="flex flex-col justify-center items-center">
         <img
           className="rounded-2xl w-36 mt-8"
-          src={user?.images[1]?.url ? user?.images[1].url : noPhoto}
+          src={user?.images[1]?.url ?? noPhoto}
         />
 
         <div className="px-4">

@@ -17,7 +17,6 @@ export default function RecentPlayed() {
 
       try {
         const response = await trackService.getRecentlyPlayed();
-        console.log(response);
         setTopTracks(response.map((r) => r.track));
       } catch (e) {
         openSnackbar(`Error fetching top tracks: ${e}`, "error");
