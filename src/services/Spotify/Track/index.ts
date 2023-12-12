@@ -27,13 +27,14 @@ async function getRecommendations(tracksIdss?: string[]): Promise<Track[]> {
   return response.data.tracks;
 }
 
-async function getRecentlyPlayed(): Promise<RecentlyPlayed[]> {
+async function getRecentlyPlayed(limit: number, before?: string | null): Promise<RecentlyPlayed> {
+  let url = before ? `me/player/recently-played?limit=${limit}&before=${before}` : `me/player/recently-played?limit=${limit}`
   let response = await fetchApi(
-    'me/player/recently-played?limit=20', 
+    url, 
     'GET'
   );
 
-  return response.data.items;
+  return response.data;
 }
 
 const trackService = {

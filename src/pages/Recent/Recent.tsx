@@ -2,72 +2,81 @@ import { useState, useContext, useEffect } from "react";
 import { Track } from "interfaces/Track";
 import { SnackbarContext } from "providers/SnackbarProvider";
 import trackService from "services/Spotify/Track";
-import Container from "components/Container/Container";
-import PlayButton from "components/PlayButton/PlayButton";
+import ListItem from "components/ListItem/ListItem";
+import { TrackHistory } from "interfaces/RecentlyPlayed";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+
+type TracksGroupedByDate = {
+  date: string;
+  tracks: Track[];
+};
 
 export default function Recent() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [topTracks, setTopTracks] = useState<Track[]>([]);
+
+  const [recentTracks, setRecentTracks] = useState<TrackHistory[]>([]);
+  const [groupedTracks, setGoupedTracks] = useState<any[]>([]);
+  const [nextPage, setNextPage] = useState<string | null>();
 
   const { openSnackbar } = useContext(SnackbarContext);
 
+  const limit = 20;
+
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-
-      try {
-        const response = await trackService.getRecentlyPlayed();
-        setTopTracks(response.map((r) => r.track));
-      } catch (e) {
-        openSnackbar(`Error fetching top tracks: ${e}`, "error");
-      }
-
-      setLoading(false);
-    };
-
     fetchData();
   }, []);
 
-  function convertToMinutes(duration: number) {
-    let minutes = duration / 60000;
-    let seconds = (duration % 60000) / 1000;
+  const fetchData = async () => {
+    setLoading(true);
 
-    return `${Math.trunc(minutes)}:${Math.trunc(seconds)}`;
-  }
+    try {
+      const response = await trackService.getRecentlyPlayed(limit, nextPage);
+
+      const before = response.items.length < limit 
+        ? null 
+        : response.cursors.before;
+
+      const allTracks = [...recentTracks, ...response.items];
+
+      setNextPage(before);
+      setRecentTracks(allTracks);
+      groupTracksByDate(allTracks);
+    } catch (e) {
+      openSnackbar(`Error fetching top tracks: ${e}`, "error");
+    }
+
+    setLoading(false);
+  };
+
+  const groupTracksByDate = (tracks: TrackHistory[]) => {
+    const groupedByDate = tracks.reduce((acc: any, item: TrackHistory) => {
+      const date = item.played_at.toString().split("T")[0];
+      acc[date] = [...(acc[date] || []), item];
+      return acc;
+    }, []);
+
+    setGoupedTracks(groupedByDate);
+  };
 
   return (
-    <>
-      <Container title="Recently Played" items={topTracks}>
-        <ul className="w-full">
-          {topTracks.map((track, index) => (
-            <li className="w-full flex flex-row items-center justify-between">
-              <div className="flex flex-row items-center whitespace-nowrap">
-                <span className="font-bold text-lg text-slate-400 w-4">
-                  {(index + 1).toString().padStart(2, "0")}
-                </span>
-                <img
-                  className="w-16 h-16 rounded-xl mx-4"
-                  src={track.album?.images[1].url}
-                />
-
-                <div className="flex flex-col max-w-xs">
-                  <span className="font-bold overflow-hidden text-ellipsis">{track.name}</span>
-                  <span className="text-sm font-semibold text-slate-400 overflow-hidden text-ellipsis">
-                    {track.artists?.map((a) => a.name).join(", ")}
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex flex-row items-center -mr-4">
-                <span className="font-bold text-slate-400">
-                  {convertToMinutes(track.duration_ms)}
-                </span>
-                <PlayButton trackId={track.id} />
-              </div>
-            </li>
+    <main>
+      <h1 className="font-bold text-xl">Recently listened songs</h1>
+      {Object.keys(groupedTracks).map((date: any, index) => (
+        <div className="mt-8" key={index}>
+          <h2 className="font-semibold text-lg">{date}</h2>
+          {groupedTracks[date].map((item: TrackHistory, trackIndex: number) => (
+            <ListItem index={trackIndex} track={item.track} showIndex={false} />
           ))}
-        </ul>
-      </Container>
-    </>
+        </div>
+      ))}
+
+      {nextPage && (
+        <button className="w-full mt-8 mb-4 font-bold" onClick={fetchData}>
+          show more{" "}
+          <FontAwesomeIcon icon={faCaretDown} className="text-lg ml-2" />
+        </button>
+      )}
+    </main>
   );
 }

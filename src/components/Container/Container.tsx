@@ -7,14 +7,17 @@ interface ContainerProps {
   title: string;
   items: Track[];
   children?: ReactNode;
+  showAll?: boolean;
 }
 
 export default function Container(props: ContainerProps) {
+  const {title, items, children, showAll = false} = props;
+
   const [numItemsToShow, setNumItemsToShow] = useState<number>(4);
-  const [seeAll, setSeeAll] = useState<boolean>(false);
+  const [seeAll, setSeeAll] = useState<boolean>(showAll);
 
   function seeAllTracks() {
-    setNumItemsToShow(props.items.length);
+    setNumItemsToShow(items.length);
     setSeeAll(true);
   }
 
@@ -26,9 +29,9 @@ export default function Container(props: ContainerProps) {
   return (
     <section className="w-full border border-slate-200 md:rounded-lg px-4 pt-4 mb-6">
       <div className="flex justify-between mb-4">
-        <h1 className="font-bold text-lg">{props.title}</h1>
+        <h1 className="font-bold text-lg">{title}</h1>
 
-        {numItemsToShow < props.items.length && (
+        {!showAll && numItemsToShow < items.length && (
           <button
             onClick={seeAllTracks}
             className="font-bold text-slate-400 hover:text-emerald-500 active:scale-95 transition duration-150 ease-in-out"
@@ -38,7 +41,7 @@ export default function Container(props: ContainerProps) {
           </button>
         )}
 
-        {seeAll && (
+        {!showAll && seeAll && (
           <button
             data-testid="seeLessBtn"
             onClick={seeLess}
@@ -49,7 +52,7 @@ export default function Container(props: ContainerProps) {
         )}
       </div>
 
-      {props.items.length ? (
+      {items.length ? (
         <div
           className={
             !seeAll
@@ -57,7 +60,7 @@ export default function Container(props: ContainerProps) {
               : "flex flex-wrap justify-between overflow-hidden h-auto"
           }
         >
-          {props.children}
+          {children}
         </div>
       ) : (
         <p className="flex justify-center items-center pb-12">
