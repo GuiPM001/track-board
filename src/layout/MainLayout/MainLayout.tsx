@@ -11,7 +11,7 @@ export default function MainLayout() {
       <Menu />
 
       <PlayerProvider>
-        <main className="bg-white mt-16 mb-0 md:my-0 pt-6 col-span-12 md:col-span-9 lg:col-span-7 overflow-y-auto scrollbar-hide">
+        <main className="bg-white mt-16 mb-0 md:my-0 pt-6 col-span-12 md:col-span-9 lg:col-span-7 overflow-y-auto overflow-x-clip scrollbar-hide">
           <Outlet />
         </main>
 

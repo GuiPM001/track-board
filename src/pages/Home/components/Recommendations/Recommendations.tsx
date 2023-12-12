@@ -29,7 +29,7 @@ export default function Recommendations() {
   }, []);
 
   return (
-    <Container title="Songs You Might Like" items={topTracks}>
+    <Container title="Songs you might like" items={topTracks}>
       {topTracks.map((track) => (
         <TrackCard
           key={track.id}

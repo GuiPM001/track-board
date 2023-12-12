@@ -29,7 +29,7 @@ export default function TopTracks() {
   }, []);
 
   return (
-    <Container title="Your Top Tracks" items={topTracks}>
+    <Container title="Your top tracks" items={topTracks}>
       {topTracks.map((track) => (
         <TrackCard
           key={track.id}

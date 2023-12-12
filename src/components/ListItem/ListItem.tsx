@@ -26,7 +26,7 @@ export default function ListItem(props: ListItemProps) {
           src={track.album?.images[1].url}
         />
 
-        <div className="flex flex-col max-w-xs">
+        <div className="flex flex-col max-w-md">
           <span className="font-bold overflow-hidden text-ellipsis">
             {track.name}
           </span>

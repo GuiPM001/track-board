@@ -59,12 +59,17 @@ export default function Recent() {
     setGoupedTracks(groupedByDate);
   };
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear();
+  }
+
   return (
-    <main>
+    <main className="lg:mx-0 md:ml-0 mx-8">
       <h1 className="font-bold text-xl">Recently listened songs</h1>
       {Object.keys(groupedTracks).map((date: any, index) => (
         <div className="mt-8" key={index}>
-          <h2 className="font-semibold text-lg">{date}</h2>
+          <h2 className="font-semibold text-lg">{formatDate(date)}</h2>
           {groupedTracks[date].map((item: TrackHistory, trackIndex: number) => (
             <ListItem index={trackIndex} track={item.track} showIndex={false} />
           ))}
