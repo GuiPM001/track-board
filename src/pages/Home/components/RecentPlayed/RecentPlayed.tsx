@@ -18,7 +18,7 @@ export default function RecentPlayed() {
       try {
         const response = await trackService.getRecentlyPlayed(5);
 
-        setTopTracks(response.items.map(r => r.track));
+        setTopTracks(response.items.map((r) => r.track));
       } catch (e) {
         openSnackbar(`Error fetching top tracks: ${e}`, "error");
       }
@@ -28,12 +28,16 @@ export default function RecentPlayed() {
 
     fetchData();
   }, []);
-  
+
   return (
     <Container title="Recently played" items={topTracks} showAll={true}>
       <ul className="w-full">
         {topTracks.map((track, index) => (
-          <ListItem index={index} track={track}/>
+          <ListItem
+            key={`${index}_${track.name}`}
+            index={index}
+            track={track}
+          />
         ))}
       </ul>
     </Container>
