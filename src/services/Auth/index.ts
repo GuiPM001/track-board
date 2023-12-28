@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const clientId: string = '4abfd39315f0438588b4f05e2bd84f54';
+const redirectUri = 'https://track-board.vercel.app';
 
 function checkAuth(): boolean {
   var authToken = localStorage.getItem('auth_token');
@@ -45,7 +46,7 @@ async function redirectToAuthCodeFlow() {
   const params = new URLSearchParams();
   params.append("client_id", clientId);
   params.append("response_type", "code");
-  params.append("redirect_uri", "https://track-board.vercel.app");
+  params.append("redirect_uri", redirectUri);
   params.append("code_challenge_method", "S256");
   params.append("code_challenge", challenge);
   params.append(
@@ -54,6 +55,7 @@ async function redirectToAuthCodeFlow() {
     user-read-email 
     user-top-read 
     user-follow-read
+    user-library-read
     user-read-recently-played
     playlist-read-private 
     playlist-read-collaborative 
@@ -71,7 +73,7 @@ async function fetchAccessToken(code: string) {
   params.append("client_id", clientId);
   params.append("grant_type", "authorization_code");
   params.append("code", code);
-  params.append("redirect_uri", "https://track-board.vercel.app");
+  params.append("redirect_uri", redirectUri);
   params.append("code_verifier", verifier!);
 
   var response = await axios('https://accounts.spotify.com/api/token', {

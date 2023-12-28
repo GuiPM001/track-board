@@ -1,3 +1,4 @@
+import { SavedTrack } from "interfaces/SavedTrack";
 import { fetchApi } from "..";
 import { RecentlyPlayed } from "../../../interfaces/RecentlyPlayed";
 import { Track } from "../../../interfaces/Track";
@@ -5,6 +6,17 @@ import { Track } from "../../../interfaces/Track";
 async function getTopTracks(): Promise<Track[]> {
   let response = await fetchApi(
     'me/top/tracks?time_range=short_term&limit=16', 
+    'GET'
+  );
+
+  return response.data.items;
+}
+
+async function getSavedTracks(qtdItems: number, page: number): Promise<SavedTrack[]> {
+  const offset = page * qtdItems;
+  
+  let response = await fetchApi(
+    `me/tracks?limit=${qtdItems}&offset=${offset}`, 
     'GET'
   );
 
@@ -39,6 +51,7 @@ async function getRecentlyPlayed(limit: number, before?: string | null): Promise
 
 const trackService = {
   getTopTracks,
+  getSavedTracks,
   getRecommendations,
   getRecentlyPlayed
 }
