@@ -27,9 +27,9 @@ export default function Container(props: ContainerProps) {
   }
 
   return (
-    <section className="w-full border border-slate-200 md:rounded-lg px-4 pt-4 mb-6">
+    <section className="w-full md:rounded-lg mb-16 px-4 md:pl-0 lg:px-0">
       <div className="flex justify-between mb-4">
-        <h1 className="font-bold text-lg">{title}</h1>
+        <h1 className="font-bold text-xl">{title}</h1>
 
         {!showAll && numItemsToShow < items.length && (
           <button
