@@ -27,7 +27,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <section className="h-3/6full w-full p-6 mb-3">
+    <section className="h-3/6 w-full p-6 mb-3">
       <h1 className="font-bold text-lg">Profile</h1>
       <div className="flex flex-col justify-center items-center">
         <img
