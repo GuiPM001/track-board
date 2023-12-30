@@ -15,7 +15,7 @@ export default function MainLayout() {
           <Outlet />
         </main>
 
-        <aside className="hidden lg:block col-span-3 border-l border-slate-200 p-6">
+        <aside className="hidden h-screen col-span-3 border-l border-slate-200 lg:flex flex-col justify-between">
           <Profile />
           <Player />
         </aside>

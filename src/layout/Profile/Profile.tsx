@@ -27,7 +27,7 @@ export default function Profile() {
   }, []);
 
   return (
-    <section className="h-3/6 w-full pb-3">
+    <section className="h-3/6full w-full p-6 mb-3">
       <h1 className="font-bold text-lg">Profile</h1>
       <div className="flex flex-col justify-center items-center">
         <img
@@ -36,7 +36,7 @@ export default function Profile() {
         />
 
         <div className="px-4">
-          <div className="w-full flex items-center justify-between my-8">
+          <div className="w-full flex items-center justify-between my-4">
             <span className="text-lg font-semibold">{user?.display_name}</span>
             <div className="h-px w-1 bg-slate-500"></div>
             <span>{user?.followers.total} followers</span>
