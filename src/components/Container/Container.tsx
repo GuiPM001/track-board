@@ -2,16 +2,18 @@ import { ReactNode, useState } from "react";
 import { Track } from "interfaces/Track";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
+import Loading from "components/Loading/Loading";
 
 interface ContainerProps {
   title: string;
   items: Track[];
   children?: ReactNode;
   showAll?: boolean;
+  isLoading?: boolean;
 }
 
 export default function Container(props: ContainerProps) {
-  const {title, items, children, showAll = false} = props;
+  const { title, items, children, showAll = false, isLoading } = props;
 
   const [numItemsToShow, setNumItemsToShow] = useState<number>(4);
   const [seeAll, setSeeAll] = useState<boolean>(showAll);
@@ -27,7 +29,7 @@ export default function Container(props: ContainerProps) {
   }
 
   return (
-    <section className="w-full md:rounded-lg mb-16 px-4 md:pl-0 lg:px-0">
+    <section className="w-full mb-16 px-4 md:pl-0 lg:px-0">
       <div className="flex justify-between mb-4">
         <h1 className="font-bold text-xl">{title}</h1>
 
@@ -52,20 +54,22 @@ export default function Container(props: ContainerProps) {
         )}
       </div>
 
-      {items.length ? (
+      {isLoading && <Loading />}
+
+      {items?.length > 0 && !isLoading && (
         <div
           className={
             !seeAll
-              ? "flex flex-wrap justify-between overflow-hidden h-52 md:h-60"
+              ? "flex flex-wrap justify-between overflow-hidden h-[275px]"
               : "flex flex-wrap justify-between overflow-hidden h-auto"
           }
         >
           {children}
         </div>
-      ) : (
-        <p className="flex justify-center items-center pb-12">
-          No data
-        </p>
+      )}
+
+      {!items.length && !isLoading && (
+        <p className="flex justify-center items-center pb-12">No data</p>
       )}
     </section>
   );

@@ -29,7 +29,7 @@ export default function Recommendations() {
   }, []);
 
   return (
-    <Container title="Songs you might like" items={topTracks}>
+    <Container title="Songs you might like" items={topTracks} isLoading={loading}>
       {topTracks.map((track) => (
         <TrackCard
           key={track.id}
@@ -37,6 +37,7 @@ export default function Recommendations() {
           name={track.name}
           artists={track.artists}
           image={track?.album?.images[1].url}
+          link={track.external_urls.spotify}
         />
       ))}
     </Container>

@@ -1,4 +1,5 @@
 import { Artist } from "./Artist";
+import { ExternalUrl } from "./ExternalUrl";
 import { Image } from "./Image";
 
 export interface Track {
@@ -7,6 +8,7 @@ export interface Track {
   duration_ms: number;
   artists: Artist[];
   album: Album;
+  external_urls: ExternalUrl;
 }
 
 interface Album {

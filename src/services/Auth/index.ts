@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const clientId: string = '4abfd39315f0438588b4f05e2bd84f54';
-const redirectUri = 'https://track-board.vercel.app';
+const redirectUri = 'http://localhost:3000';
 
 function checkAuth(): boolean {
   var authToken = localStorage.getItem('auth_token');

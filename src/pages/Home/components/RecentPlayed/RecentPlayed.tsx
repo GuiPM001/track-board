@@ -30,7 +30,7 @@ export default function RecentPlayed() {
   }, []);
 
   return (
-    <Container title="Recently played" items={topTracks} showAll={true}>
+    <Container title="Recently played" items={topTracks} showAll={true} isLoading={loading}>
       <ul className="w-full">
         {topTracks.map((track, index) => (
           <ListItem

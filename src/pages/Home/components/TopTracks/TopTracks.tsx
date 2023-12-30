@@ -4,6 +4,7 @@ import { Track } from "interfaces/Track";
 import trackService from "services/Spotify/Track";
 import TrackCard from "components/TrackCard/TrackCard";
 import Container from "components/Container/Container";
+import Loading from "components/Loading/Loading";
 
 export default function TopTracks() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -29,7 +30,7 @@ export default function TopTracks() {
   }, []);
 
   return (
-    <Container title="Your top tracks" items={topTracks}>
+    <Container title="Your top tracks" items={topTracks} isLoading={loading}>
       {topTracks.map((track) => (
         <TrackCard
           key={track.id}
@@ -37,6 +38,7 @@ export default function TopTracks() {
           name={track.name}
           artists={track.artists}
           image={track?.album?.images[1].url}
+          link={track.external_urls.spotify}
         />
       ))}
     </Container>

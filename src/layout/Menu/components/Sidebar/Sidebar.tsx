@@ -1,15 +1,7 @@
 import React from "react";
 import Section from "../Section/Section";
 import logo from "assets/logo.png";
-import {
-  faClock,
-  faFileLines,
-  faHeart,
-  faHouse,
-  faRightFromBracket,
-  faThumbsUp,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faClock, faHeart, faHouse } from "@fortawesome/free-solid-svg-icons";
 
 export default function Sidebar() {
   return (
@@ -24,25 +16,7 @@ export default function Sidebar() {
             { icon: faHeart, name: "favorites", route: "/favorites" },
           ]}
         />
-
-        <Section
-          title="Playlist"
-          links={[
-            { icon: faFileLines, name: "playlists", route: "/playlists" },
-            { icon: faThumbsUp, name: "suggestion", route: "/recommendation",
-            },
-          ]}
-        />
-
-        <div className="fixed bottom-0">
-          <Section
-            title="General"
-            links={[
-              { icon: faRightFromBracket, name: "log out", route: "/logout" },
-            ]}
-          />
-        </div>
       </nav>
     </div>
-  )
+  );
 }

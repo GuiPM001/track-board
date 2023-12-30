@@ -5,9 +5,10 @@ import ListItem from "components/ListItem/ListItem";
 import { TrackHistory } from "interfaces/RecentlyPlayed";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import Loading from "components/Loading/Loading";
 
 export default function Recent() {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [recentTracks, setRecentTracks] = useState<TrackHistory[]>([]);
   const [groupedTracks, setGoupedTracks] = useState<any[]>([]);
@@ -22,7 +23,7 @@ export default function Recent() {
   }, []);
 
   const fetchData = async () => {
-    setLoading(true);
+    setIsLoading(true);
 
     try {
       const response = await trackService.getRecentlyPlayed(limit, nextPage);
@@ -39,7 +40,7 @@ export default function Recent() {
       openSnackbar(`Error fetching top tracks: ${e}`, "error");
     }
 
-    setLoading(false);
+    setIsLoading(false);
   };
 
   const groupTracksByDate = (tracks: TrackHistory[]) => {
@@ -62,6 +63,9 @@ export default function Recent() {
   return (
     <main className="lg:mx-0 md:ml-0 mx-8">
       <h1 className="font-bold text-xl">Recently listened songs</h1>
+
+      {isLoading && <Loading />}
+
       {Object.keys(groupedTracks).map((date: any, index) => (
         <div className="mt-8" key={index}>
           <h2 className="font-semibold text-lg">{formatDate(date)}</h2>

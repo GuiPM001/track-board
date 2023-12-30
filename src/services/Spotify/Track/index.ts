@@ -4,7 +4,7 @@ import { RecentlyPlayed } from "../../../interfaces/RecentlyPlayed";
 import { Track } from "../../../interfaces/Track";
 
 async function getTopTracks(): Promise<Track[]> {
-  let response = await fetchApi(
+  const response = await fetchApi(
     'me/top/tracks?time_range=short_term&limit=16', 
     'GET'
   );
@@ -15,7 +15,7 @@ async function getTopTracks(): Promise<Track[]> {
 async function getSavedTracks(qtdItems: number, page: number): Promise<SavedTrack[]> {
   const offset = page * qtdItems;
   
-  let response = await fetchApi(
+  const response = await fetchApi(
     `me/tracks?limit=${qtdItems}&offset=${offset}`, 
     'GET'
   );
@@ -29,9 +29,9 @@ async function getRecommendations(tracksIdss?: string[]): Promise<Track[]> {
     'GET'
   );
 
-    const tracksIds = tracks.data.items.map((t: Track) => t.id);
+  const tracksIds = tracks.data.items.map((t: Track) => t.id);
 
-  let response = await fetchApi(
+  const response = await fetchApi(
     `recommendations?limit=16&seed_tracks=${tracksIds.slice(0, 5).join(',')}`, 
     'GET'
   );
@@ -40,8 +40,8 @@ async function getRecommendations(tracksIdss?: string[]): Promise<Track[]> {
 }
 
 async function getRecentlyPlayed(limit: number, before?: string | null): Promise<RecentlyPlayed> {
-  let url = before ? `me/player/recently-played?limit=${limit}&before=${before}` : `me/player/recently-played?limit=${limit}`
-  let response = await fetchApi(
+  const url = before ? `me/player/recently-played?limit=${limit}&before=${before}` : `me/player/recently-played?limit=${limit}`
+  const response = await fetchApi(
     url, 
     'GET'
   );

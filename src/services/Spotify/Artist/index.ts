@@ -3,7 +3,7 @@ import { Artist } from "../../../interfaces/Artist";
 
 async function getFollowArtists(): Promise<Artist[]> {
   let response = await fetchApi(
-    'me/following?type=artist&limit=14',
+    'me/following?type=artist&limit=50',
     'GET'
   );
 

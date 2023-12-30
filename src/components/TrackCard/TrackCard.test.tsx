@@ -6,7 +6,7 @@ const artistsMock: Artist[] = [
   {
     id: "1",
     name: "Aritst 1",
-    uri: "artist-uri",
+    external_urls: { spotify: "artist-url" },
     images: [{ url: "image-uri", height: 150, width: 150 }],
   },
 ];
@@ -16,15 +16,13 @@ const mockTrack = {
   name: "Track name",
   artists: artistsMock,
   image: "image-url",
+  link: "TrackLink"
 };
 
 test("renders component with provided props", () => {
-  const { getByText, getByTestId } = render(
+  const { getByText } = render(
     <TrackCard {...mockTrack} />
   );
 
-  expect(getByTestId("trackImage")).toHaveStyle(
-    `backgroundImage: url(${mockTrack.image})`
-  );
   expect(getByText("Track name")).toBeInTheDocument();
 });

@@ -13,22 +13,8 @@ test("renders the component with sections and links", () => {
   const logoImage = getByAltText("Logo");
   expect(logoImage).toBeInTheDocument();
 
-  // Menu Section
-  expect(getByText("Menu")).toBeInTheDocument();
-  expect(getByText("home")).toBeInTheDocument();
-  expect(getByText("profile")).toBeInTheDocument();
-
-  // Library Section
   expect(getByText("Library")).toBeInTheDocument();
+  expect(getByText("home")).toBeInTheDocument();
   expect(getByText("recent")).toBeInTheDocument();
   expect(getByText("favorites")).toBeInTheDocument();
-
-  // Playlist Section
-  expect(getByText("Playlist")).toBeInTheDocument();
-  expect(getByText("playlists")).toBeInTheDocument();
-  expect(getByText("suggestion")).toBeInTheDocument();
-
-  // General Section
-  expect(getByText("General")).toBeInTheDocument();
-  expect(getByText("log out")).toBeInTheDocument();
 })

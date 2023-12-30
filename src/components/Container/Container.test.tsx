@@ -9,6 +9,7 @@ const mockItems: Track[] = [
     duration_ms: 150,
     artists: [],
     album: { images: [] },
+    external_urls: { spotify: '' }
   },
   {
     id: "2",
@@ -16,6 +17,7 @@ const mockItems: Track[] = [
     duration_ms: 150,
     artists: [],
     album: { images: [] },
+    external_urls: { spotify: '' }
   },
   {
     id: "3",
@@ -23,6 +25,7 @@ const mockItems: Track[] = [
     duration_ms: 150,
     artists: [],
     album: { images: [] },
+    external_urls: { spotify: '' }
   },
   {
     id: "4",
@@ -30,6 +33,7 @@ const mockItems: Track[] = [
     duration_ms: 150,
     artists: [],
     album: { images: [] },
+    external_urls: { spotify: '' }
   },
   {
     id: "5",
@@ -37,6 +41,7 @@ const mockItems: Track[] = [
     duration_ms: 150,
     artists: [],
     album: { images: [] },
+    external_urls: { spotify: '' }
   },
 ];
 

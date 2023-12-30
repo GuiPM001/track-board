@@ -1,21 +1,17 @@
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Carousel from "components/Carousel/Carousel";
-import Container from "components/Container/Container";
-import ListItem from "components/ListItem/ListItem";
-import TrackCard from "components/TrackCard/TrackCard";
 import { Artist } from "interfaces/Artist";
-import { Playlist } from "interfaces/Playlist";
 import { SavedTrack } from "interfaces/SavedTrack";
-import { Track } from "interfaces/Track";
 import { SnackbarContext } from "providers/SnackbarProvider";
 import { useEffect, useState, useContext } from "react";
+import Carousel from "components/Carousel/Carousel";
+import ListItem from "components/ListItem/ListItem";
+import Loading from "components/Loading/Loading";
 import artistService from "services/Spotify/Artist";
-import playlistService from "services/Spotify/Playlist";
 import trackService from "services/Spotify/Track";
 
 export default function Favorites() {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [savedTracks, setSavedTracks] = useState<SavedTrack[]>([]);
   const [followArtists, setFollowArtists] = useState<Artist[]>([]);
@@ -29,7 +25,7 @@ export default function Favorites() {
   }, []);
 
   const fetchData = async () => {
-    setLoading(true);
+    setIsLoading(true);
 
     try {
       const savedTracks = await trackService.getSavedTracks(qtdItems, 0);
@@ -41,7 +37,7 @@ export default function Favorites() {
       openSnackbar(`Error fetching top tracks: ${e}`, "error");
     }
 
-    setLoading(false);
+    setIsLoading(false);
   };
 
   const fetchNextPage = async () => {
@@ -49,26 +45,42 @@ export default function Favorites() {
 
     const tracks = await trackService.getSavedTracks(qtdItems, page);
     setSavedTracks([...savedTracks, ...tracks]);
-  }
+  };
 
   return (
     <main className="lg:mx-0 md:ml-0 mx-8">
-      <Carousel title="Followed artists" items={followArtists} />
+      <div>
+        <h1 className="font-bold text-xl">Followed artists</h1>
+        {isLoading && <Loading />}
+        <Carousel items={followArtists} />
+      </div>
 
-      <h1 className="font-bold text-xl mt-12">Saved tracks</h1>
-      {savedTracks.map((item: SavedTrack, index: number) => (
-        <ListItem
-          key={index}
-          index={index}
-          track={item.track}
-          showIndex={false}
-        />
-      ))}
+      <div>
+        <h1 className="font-bold text-xl mt-12 mb-4">Saved tracks</h1>
+        {isLoading && <Loading />}
 
-      <button className="w-full mt-8 mb-4 font-bold" onClick={fetchNextPage}>
-        show more{" "}
-        <FontAwesomeIcon icon={faCaretDown} className="text-lg ml-2" />
-      </button>
+        {savedTracks?.length > 0 && !isLoading && (
+          <>
+            {savedTracks.map((item: SavedTrack, index: number) => (
+              <ListItem
+                key={index}
+                index={index}
+                track={item.track}
+                showIndex={false}
+              />
+            ))}
+
+            <button onClick={fetchNextPage} className="w-full mt-8 mb-4 font-bold">
+              show more
+              <FontAwesomeIcon icon={faCaretDown} className="text-lg ml-2" />
+            </button>
+          </>
+        )}
+
+        {!savedTracks.length && !isLoading && (
+          <p className="flex justify-center items-center pb-12">No data</p>
+        )}
+      </div>
     </main>
   );
 }
