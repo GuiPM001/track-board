@@ -7,9 +7,9 @@ export default function Player() {
   const srcEmbed = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`;
 
   return (
-    <section className="h-full lg:h-[35vh] w-full flex justify-center items-center lg:mt-3 bg-[#282828] rounded-t-xl lg:bg-transparent">
+    <section className="h-full lg:h-[35vh] w-full flex justify-center items-center lg:mt-3 bg-[#282828] rounded-t-xl lg:bg-transparent lg:px-6">
       {trackId ? (
-        <div className="h-full w-full rounded-t-xl lg:rounded-xl flex flex-col items-center lg:pt-12 px-6">
+        <div className="h-full w-full rounded-t-xl lg:rounded-xl flex flex-col items-center lg:pt-12">
           <iframe
             className="w-full lg:h-[35vh] h-20 rounded-none"
             src={srcEmbed}
