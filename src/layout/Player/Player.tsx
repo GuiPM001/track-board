@@ -7,7 +7,7 @@ export default function Player() {
   const srcEmbed = `https://open.spotify.com/embed/track/${trackId}?utm_source=generator&theme=0`;
 
   return (
-    <section className="h-full lg:h-[35vh] w-full flex justify-center items-center lg:mt-3 bg-[#282828] rounded-t-xl lg:bg-transparent px-6">
+    <section className="h-full lg:h-[35vh] w-full flex justify-center items-center lg:mt-3 bg-[#282828] rounded-t-xl lg:bg-transparent">
       {trackId ? (
         <div className="h-full w-full rounded-t-xl lg:rounded-xl flex flex-col items-center lg:pt-12">
           <iframe
@@ -18,7 +18,7 @@ export default function Player() {
           ></iframe>
         </div>
       ) : (
-        <div className="h-full lg:h-[25vh] w-full bg-emerald-500 rounded-t-xl lg:rounded-xl flex flex-col items-start lg:items-center justify-center">
+        <div className="h-full lg:h-[25vh] w-full bg-emerald-500 rounded-t-xl lg:rounded-xl flex flex-col items-start lg:items-center justify-center px-6">
           <span className="lg:w-32 text-xl text-center font-semibold lg:font-bold text-white absolute lg:mt-4">
             Select some track
           </span>
