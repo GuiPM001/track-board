@@ -9,7 +9,7 @@ export default function Player() {
   return (
     <section className="h-full lg:h-[35vh] w-full flex justify-center items-center lg:mt-3 bg-[#282828] rounded-t-xl lg:bg-transparent">
       {trackId ? (
-        <div className="h-full w-full rounded-t-xl lg:rounded-xl flex flex-col items-center lg:pt-12">
+        <div className="h-full w-full rounded-t-xl lg:rounded-xl flex flex-col items-center lg:pt-12 px-6">
           <iframe
             className="w-full lg:h-[35vh] h-20 rounded-none"
             src={srcEmbed}
