@@ -57,10 +57,6 @@ async function redirectToAuthCodeFlow() {
     user-follow-read
     user-library-read
     user-read-recently-played
-    playlist-read-private 
-    playlist-read-collaborative 
-    playlist-modify-public 
-    playlist-modify-private
   `);
 
   document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
