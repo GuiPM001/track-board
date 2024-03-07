@@ -3,12 +3,9 @@
 </div>
 
 ## ✦ About The Project
-<div>
-  <p>Website that uses the information provided by the Spotify API to display user's information and generate music recommendations.</p>
-  <video controls width="250">
-    <source src="./media/screen-capture.webm" type="video/webm" />
-  </video>
-</div>
+Website that uses the information provided by the Spotify API to display user's information and generate music recommendations.
+
+[screen-capture.webm](https://github.com/GuiPM001/track-board/assets/61996586/36e3aeb9-a79d-4b00-bd20-8596a611d6c9)
 
 ### Built With
 [![React][React-image]][React-url]
